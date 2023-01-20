@@ -110,7 +110,12 @@ else()
     append_torchlib_if_found(pthreadpool)
   endif()
 
-  append_torchlib_if_found(eigen_blas)
+  # TOFIX: Check configured BLAS version
+  if(True)
+    append_torchlib_if_found(openblas)
+  else()
+    append_torchlib_if_found(eigen_blas)
+  endif()
 
   if(@USE_FBGEMM@)
     append_torchlib_if_found(fbgemm)

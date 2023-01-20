@@ -1,7 +1,7 @@
 allprojects {
     buildscript {
         ext {
-            minSdkVersion = 21
+            minSdkVersion = 24
             targetSdkVersion = 28
             compileSdkVersion = 28
             buildToolsVersion = '28.0.3'

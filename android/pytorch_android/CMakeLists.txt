@@ -114,9 +114,9 @@ if(ANDROID_ABI)
   import_static_lib(libXNNPACK)
   import_static_lib(libpytorch_qnnpack)
   import_static_lib(libpthreadpool)
-  import_static_lib(libeigen_blas)
   import_static_lib(libcpuinfo)
   import_static_lib(libclog)
+  import_static_lib(libomp)
 
   # Link most things statically on Android.
   set(pytorch_jni_LIBS
@@ -131,10 +131,19 @@ if(ANDROID_ABI)
       libXNNPACK
       libpytorch_qnnpack
       libpthreadpool
-      libeigen_blas
       libcpuinfo
       libclog
+      -static-openmp
+      -fopenmp
   )
+  # TOFIX: Check configured BLAS version
+  if(True)
+    import_static_lib(libopenblas)
+    list(APPEND pytorch_jni_LIBS libopenblas)
+  else()
+    import_static_lib(libeigen_blas)
+    list(APPEND pytorch_jni_LIBS libeigen_blas)
+  endif()
 else()
   # Prefer dynamic linking on the host
   set(pytorch_jni_LIBS

@@ -342,3 +342,8 @@ venv/
 
 # Log files
 *.log
+
+# Build files
+.cxx/
+build/
+build_*/
